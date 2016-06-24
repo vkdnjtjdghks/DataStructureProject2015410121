@@ -139,7 +139,7 @@ void DeleteWord(Node *pNode, void *pData) {
 
 
 		if (strcmp(pWord, pUserWord) == 0) {
-			free(pUserWord);
+		
 			LN_DeleteNode(&pUser->pTweet, pCurrentNode);
 			pUser->iTweetNum--;
 		}
