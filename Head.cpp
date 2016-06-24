@@ -165,14 +165,14 @@ void DeleteUserFromWord(Node *pNode, void *pData) {
 			while (pUser->pTweet != NULL) {
 				char* pUserWord = (char*)(pUser->pTweet->LData);
 
-				free(pUserWord);
+			
 				LN_DeleteNode(&pUser->pTweet, pUser->pTweet);
 				pUser->iTweetNum--;
 			}
 			while (pUser->pFollow != NULL) {
 				int* pUserID = (int*)(pUser->pFollow->LData);
 
-				free(pUserID);
+			
 				LN_DeleteNode(&pUser->pFollow, pUser->pFollow);
 				pUser->iFollowNum--;
 			}
