@@ -15,6 +15,7 @@ int main() {
 	null = RBInitNode(0, 0);
 	null->Color = Node::Black;
 	do {
+		//메뉴 디스플레이
 		int N;
 		printf("0. Read data files\n");
 		printf("1. Display statistics\n");
@@ -38,16 +39,16 @@ int main() {
 			int NumofFriends = 0;
 
 			char temp[1000];
-
+			//파일을 읽는다
 			FILE *fp = fopen("user.txt", "r");
 
 
 			while (fgets(temp, sizeof(temp), fp) != NULL) {
 
 				if (!(temp[0] == '\n' || temp[0] == ' ' || temp[0] == 't')) {
-					char *pos;
+					char *pos;//계행처리
 					int ID = atoi(temp);
-					fgets(temp, sizeof(temp), fp);
+					fgets(temp, sizeof(temp), fp);//날짜무시
 					fgets(temp, sizeof(temp), fp);
 		if ((pos = strchr(temp, '\n')) != NULL)
 						*pos = '\0';
@@ -55,15 +56,15 @@ int main() {
 
 					NumofUser = NumofUser + 1;
 
-					User* pUser = (User*)malloc(sizeof(User));
+					User* pUser = (User*)malloc(sizeof(User));//유저 정보
 					pUser->iFollowNum = 0;
 					pUser->pFollow = NULL;
 					pUser->iTweetNum = 0;
 					pUser->pTweet = NULL;
 
-					strcpy(pUser->szName, temp);
+					strcpy(pUser->szName, temp);// 이름복사
 
-					RBInsertNode(&pTree, RBInitNode(ID, pUser));
+					RBInsertNode(&pTree, RBInitNode(ID, pUser));//레드블랙트리에 ID와 유저정보를 넣는다
 				}
 			}
 			fclose(fp);
@@ -74,14 +75,14 @@ int main() {
 
 				if (!(temp[0] == '\n' || temp[0] == ' ' ||temp[0] =='t')) {
 					int ID = atoi(temp);
-					Node *pUserNode = RBFindNode(pTree, ID);
+					Node *pUserNode = RBFindNode(pTree, ID);//노드 서치 
 					User *pUser = (User*)pUserNode->RBData;
 					fgets(temp, sizeof(temp), fp);
 					int FriendID = atoi(temp);
 					int* pFollow = (int*)malloc(sizeof(int));
 					*pFollow = FriendID;
 					NumofFriends++;
-					LN_InsertNode(&pUser->pFollow, pFollow);
+					LN_InsertNode(&pUser->pFollow, pFollow);//링크드리스트 사용 친구구현
 					pUser->iFollowNum++;
 				}
 			}
@@ -131,7 +132,7 @@ int main() {
 			RBTraverse(pTree, &iMaxFollowNum, MaxFollowNum);
 			RBTraverse(pTree, &iMinTweetNum, MinTweetNum);
 			RBTraverse(pTree, &iMaxTweetNum, MaxTweetNum);
-
+			//순회
 			printf("\nAverage number of friends : %d\n", NumofFriends / NumofUsers);
 			printf("Minimum friends : %d\n", iMinFollowNum);
 			printf("Maximum friends : %d\n", iMaxFollowNum);
@@ -147,9 +148,9 @@ int main() {
 
 			HashTable* pHash = CreateHashTable(iTweetNum);
 
-			RBTraverse(pTree, pHash, SearchWordNum);
+			RBTraverse(pTree, pHash, SearchWordNum);// 순회후
 
-			PQueue pq;
+			PQueue pq;//우선순위 큐
 
 			PQueueInit(&pq, iTweetNum, fnTweetWordComp);
 
@@ -190,7 +191,7 @@ int main() {
 
 			PQueueInit(&pq, iUserNum, fnTweetUserComp);
 
-			RBTraverse(pTree, &pq, EnqueueNode);
+			RBTraverse(pTree, &pq, EnqueueNode);//우선순위큐
 
 			printf("\n");
 			printf("Top 5 most tweeted users\n\n");
@@ -218,7 +219,7 @@ int main() {
 
 			printf("\n");
 			printf("Users : ");
-			RBTraverse(pTree, temp, PrintUserWhoTweetWord);
+			RBTraverse(pTree, temp, PrintUserWhoTweetWord);//순회
 			printf("\n\n");
 			break;
 
@@ -233,7 +234,7 @@ int main() {
 			memset(pUserList, 0, sizeof(int) * iUserNum);
 			Tuple tuple = { buf,pUserList };
 
-			printf("Input tweet : ");
+			printf("Input tweet : ");//4번반복
 			scanf("%s", buf);
 
 			PQueue pq;
@@ -316,7 +317,7 @@ int main() {
 			printf("Type tweet word : ");
 			scanf("%s", temp);
 
-			RBTraverse(pTree, temp, DeleteWord);
+			RBTraverse(pTree, temp, DeleteWord);//순회후 단어가 같으면 삭제
 
 		//힙 메모리 에러가 떠서 결국 고치지 못함.. 는 고침
 		}
@@ -349,7 +350,7 @@ int main() {
 				RBReleaseNode(pDeleteNode);
 
 				Cnt++;
-			}
+			}//데이터구조에서 유저삭제
 
 			RBTraverse(pTree, pDeleteUserList, DeleteFollowFromList);
 
