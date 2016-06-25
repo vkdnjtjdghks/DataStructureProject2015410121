@@ -309,7 +309,7 @@ int main() {
 		
 		case 6:
 		{
-			/*
+			
 			char temp[512];
 
 			printf("\n");
@@ -317,14 +317,14 @@ int main() {
 			scanf("%s", temp);
 
 			RBTraverse(pTree, temp, DeleteWord);
-			*/
-		//Èü ¸Ş¸ğ¸® ¿¡·¯°¡ ¶°¼­ °á±¹ °íÄ¡Áö ¸øÇÔ..
+
+		//í™ ë©”ëª¨ë¦¬ ì—ëŸ¬ê°€ ë– ì„œ ê²°êµ­ ê³ ì¹˜ì§€ ëª»í•¨.. ëŠ” ê³ ì¹¨
 		}
 		break;
 
 		case 7:
 		{
-		/*
+		
 			char temp[1000];
 
 			printf("\n");
@@ -354,11 +354,20 @@ int main() {
 			RBTraverse(pTree, pDeleteUserList, DeleteFollowFromList);
 
 			free(pDeleteUserList);
-		*/
-			//ÀÌ°Íµµ °á±¹ °íÄ¡Áö ¸øÇÔ...
+		
+			//ì´ê²ƒë„ ê²°êµ­ ê³ ì¹˜ì§€ ëª»í•¨... ëŠ” ê³ ì¹¨
 		}
 		break;
-
+		case 8:
+		{
+		
+		}
+		break;
+		case 9:
+		{
+			
+		}
+		break;
 		default:
 			break;
 	}
